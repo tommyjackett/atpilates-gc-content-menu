@@ -521,11 +521,12 @@ body {
   /* ── Carousel strips: horizontal swipe, show first slide ── */
   .carousel-strip {
     overflow-x: scroll;
-    overflow-y: hidden;
+    overflow-y: visible;
     -webkit-overflow-scrolling: touch;
     scroll-snap-type: x mandatory;
-    padding: 16px 12px 8px 12px;
-    gap: 12px;
+    padding: 28px 16px 8px 16px;
+    scroll-padding-left: 16px;
+    gap: 16px;
     scrollbar-width: none;
     -ms-overflow-style: none;
     max-width: 100vw;
@@ -538,12 +539,29 @@ body {
     scroll-snap-align: start;
   }
   .slide {
-    width: calc(100vw - 48px);
-    height: calc((100vw - 48px) * 1.25);
+    width: calc(100vw - 56px);
+    height: calc((100vw - 56px) * 1.25);
   }
   .video-container {
-    width: calc(100vw - 48px);
-    height: calc((100vw - 48px) * 1.25);
+    width: calc(100vw - 56px);
+    height: calc((100vw - 56px) * 1.25);
+  }
+  /* Keep stickers inside the card on mobile */
+  .topic-sticker {
+    left: 0;
+    top: -20px;
+  }
+  .sticker-quote {
+    left: 8px;
+    right: 8px;
+    font-size: 13px;
+    padding: 10px 12px;
+  }
+  .sticker-hook {
+    left: 8px;
+    right: 8px;
+    font-size: 18px;
+    bottom: 70px;
   }
   /* Hide chevrons between slides on mobile — swipe instead */
   .carousel-strip .slide-chevron {
@@ -574,14 +592,23 @@ body {
     border-radius: 4px;
   }
 
+  /* ── Topic headers: add left padding on mobile ── */
+  .topic-header {
+    padding-left: 16px;
+  }
+  .topic-tape {
+    transform: rotate(0deg);
+  }
+
   /* ── Montage / Highlights rows: horizontal swipe ── */
   .highlights-row {
     overflow-x: scroll;
-    overflow-y: hidden;
+    overflow-y: visible;
     -webkit-overflow-scrolling: touch;
     scroll-snap-type: x mandatory;
-    padding-bottom: 8px;
-    gap: 10px;
+    padding: 8px 16px 12px 16px;
+    scroll-padding-left: 16px;
+    gap: 12px;
     scrollbar-width: none;
     -ms-overflow-style: none;
     max-width: 100vw;
@@ -593,12 +620,16 @@ body {
   .moment-card {
     scroll-snap-align: start;
     flex-shrink: 0;
-    width: calc(100vw - 48px);
-    min-width: calc(100vw - 48px);
+    width: calc(100vw - 56px);
+    min-width: calc(100vw - 56px);
   }
   .video-frame {
     width: 100%;
-    height: calc((100vw - 48px) * 1.25);
+    height: calc((100vw - 56px) * 1.25);
+  }
+  /* Keep sticker-stack inside the card on mobile */
+  .sticker-stack {
+    left: 8px;
   }
   /* Hide chevrons between moment cards on mobile */
   .chevron {
