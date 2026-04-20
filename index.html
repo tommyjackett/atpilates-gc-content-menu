@@ -164,6 +164,10 @@ body {
 .card-arrow {
   position: absolute;
   z-index: 20;
+  display: none;
+}
+@media (min-width: 769px) {
+  .card-arrow { display: block; }
 }
 .card-arrow svg {
   opacity: 0.85;
@@ -709,10 +713,7 @@ body {
     display: none !important;
   }
   .card-arrow {
-    /* visible at all sizes — clipped by slide overflow */
-  }
-  .slide {
-    overflow: hidden;
+    /* hidden by default, shown via min-width: 769px rule */
   }
 
   /* ── Dot indicators for carousel ── */
