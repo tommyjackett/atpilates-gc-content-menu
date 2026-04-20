@@ -295,20 +295,20 @@ body {
   text-align: center;
   position: relative;
 }
-.hero-arch-content {
-  background: #C58E93;
-  padding: 48px 40px 20px;
-  position: relative;
-  z-index: 1;
-}
-.hero-arch::after {
+.hero-arch::before {
   content: '';
   display: block;
   width: 100%;
-  padding-bottom: 22%;
+  padding-bottom: 50%;
   background: #C58E93;
-  border-radius: 0 0 50% 50% / 0 0 100% 100%;
-  margin-top: -1px;
+  border-radius: 50% 50% 0 0 / 100% 100% 0 0;
+  margin-bottom: -1px;
+}
+.hero-arch-content {
+  background: #C58E93;
+  padding: 0 40px 32px;
+  position: relative;
+  z-index: 1;
 }
 .hero-arch .arch-logo {
   height: 44px;
@@ -608,10 +608,10 @@ body {
   }
   .hero-arch {
     margin: -24px auto 0;
-    max-width: calc(100% - 8px);
+    max-width: calc(100% - 16px);
   }
   .hero-arch-content {
-    padding: 32px 20px 16px;
+    padding: 0 20px 24px;
   }
   .hero-arch .arch-logo {
     height: 36px;
