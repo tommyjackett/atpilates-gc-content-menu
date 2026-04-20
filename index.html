@@ -289,30 +289,20 @@ body {
 
 /* ═══ BRAND ARCH HERO ═══ */
 .hero-arch {
-  max-width: 560px;
+  background: #C58E93;
+  max-width: 480px;
   width: 100%;
   margin: -40px auto 0;
   text-align: center;
-  position: relative;
-}
-.hero-arch::before {
-  content: '';
-  display: block;
-  width: 100%;
-  padding-bottom: 25%;
-  background: #C58E93;
-  border-radius: 50% 50% 0 0 / 100% 100% 0 0;
-  margin-bottom: -1px;
+  border-radius: 240px 240px 0 0;
+  padding: 100px 48px 40px;
 }
 .hero-arch-content {
-  background: #C58E93;
-  padding: 0 40px 40px;
-  position: relative;
-  z-index: 1;
+  /* content flows naturally inside the arch */
 }
 .hero-arch .arch-logo {
-  height: 44px;
-  margin-bottom: 16px;
+  height: 40px;
+  margin-bottom: 14px;
 }
 
 /* ═══ PAGE TITLE ═══ */
@@ -608,10 +598,9 @@ body {
   }
   .hero-arch {
     margin: -24px auto 0;
-    max-width: calc(100% - 16px);
-  }
-  .hero-arch-content {
-    padding: 0 20px 24px;
+    max-width: calc(100% - 24px);
+    border-radius: calc((100% - 24px) / 2) calc((100% - 24px) / 2) 0 0;
+    padding: 80px 28px 32px;
   }
   .hero-arch .arch-logo {
     height: 36px;
