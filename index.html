@@ -31,7 +31,7 @@ body {
 .page-header h1 { font-size: 13px; font-weight: 400; color: #999; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 4px; }
 .page-header .thread-name { font-size: 18px; font-weight: 700; color: #333; }
 
-.carousel-strip { display: flex; align-items: center; gap: 16px; overflow: visible; max-width: 1200px; width: 100%; padding: 32px 16px 40px 16px; }
+.carousel-strip { display: flex; align-items: center; gap: 16px; max-width: 1200px; width: 100%; padding: 32px 16px 40px 16px; flex-wrap: nowrap; }
 .slide-wrap { flex-shrink: 0; }
 .slide { 
   position: relative; 
@@ -485,6 +485,10 @@ body {
 }
 /* ═══ MOBILE RESPONSIVE ═══ */
 @media (max-width: 768px) {
+  html, body {
+    overflow-x: hidden;
+    max-width: 100vw;
+  }
   body {
     padding: 24px 12px;
   }
@@ -516,15 +520,15 @@ body {
 
   /* ── Carousel strips: horizontal swipe, show first slide ── */
   .carousel-strip {
-    overflow: hidden auto !important;
-    overflow-x: auto !important;
-    overflow-y: hidden !important;
+    overflow-x: scroll;
+    overflow-y: hidden;
     -webkit-overflow-scrolling: touch;
     scroll-snap-type: x mandatory;
     padding: 16px 12px 8px 12px;
     gap: 12px;
     scrollbar-width: none;
     -ms-overflow-style: none;
+    max-width: 100vw;
   }
   .carousel-strip::-webkit-scrollbar {
     display: none;
@@ -572,16 +576,16 @@ body {
 
   /* ── Montage / Highlights rows: horizontal swipe ── */
   .highlights-row {
-    overflow: hidden auto !important;
-    overflow-x: auto !important;
-    overflow-y: hidden !important;
+    overflow-x: scroll;
+    overflow-y: hidden;
     -webkit-overflow-scrolling: touch;
     scroll-snap-type: x mandatory;
-    scroll-behavior: smooth;
     padding-bottom: 8px;
     gap: 10px;
     scrollbar-width: none;
     -ms-overflow-style: none;
+    max-width: 100vw;
+    flex-wrap: nowrap;
   }
   .highlights-row::-webkit-scrollbar {
     display: none;
@@ -589,11 +593,12 @@ body {
   .moment-card {
     scroll-snap-align: start;
     flex-shrink: 0;
-    width: calc(100vw - 64px);
+    width: calc(100vw - 48px);
+    min-width: calc(100vw - 48px);
   }
   .video-frame {
     width: 100%;
-    height: calc((100vw - 64px) * 1.25);
+    height: calc((100vw - 48px) * 1.25);
   }
   /* Hide chevrons between moment cards on mobile */
   .chevron {
@@ -1884,9 +1889,19 @@ function toggleMontageVid(key) {
     }
   };
 
+  // ── Force all scroll containers to start at position 0 ──
+  function resetAllScrollPositions() {
+    document.querySelectorAll('.carousel-strip').forEach(el => { el.scrollLeft = 0; });
+    document.querySelectorAll('.highlights-row').forEach(el => { el.scrollLeft = 0; });
+  }
+
   document.addEventListener('DOMContentLoaded', function() {
     initCarouselDots();
     initMontageDots();
+    // Reset on load and after a short delay (browser may restore scroll)
+    resetAllScrollPositions();
+    setTimeout(resetAllScrollPositions, 100);
+    setTimeout(resetAllScrollPositions, 500);
   });
 })();
 </script>
