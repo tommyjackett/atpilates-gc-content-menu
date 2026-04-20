@@ -408,6 +408,23 @@ body {
 .mm-play-btn:hover {
   transform: translate(-50%, -50%) scale(1.08);
 }
+.video-frame.loading .mm-play-btn {
+  opacity: 0;
+  pointer-events: none;
+}
+.video-frame.loading::after {
+  content: '';
+  position: absolute;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  width: 36px; height: 36px;
+  border: 3px solid rgba(255,255,255,0.3);
+  border-top-color: #fff;
+  border-radius: 50%;
+  z-index: 12;
+  animation: spin 0.8s linear infinite;
+}
+@keyframes spin { to { transform: translate(-50%, -50%) rotate(360deg); } }
 .video-frame.playing .mm-play-btn {
   opacity: 0;
   pointer-events: none;
@@ -557,10 +574,11 @@ body {
     width: calc(100vw - 56px);
     height: calc((100vw - 56px) * 1.25);
   }
-  /* Keep stickers inside the card on mobile */
+  /* Keep stickers inside the card on mobile — below the logo area */
   .topic-sticker {
     left: 8px;
-    top: 8px;
+    top: auto;
+    bottom: 8px;
   }
   .sticker-quote {
     left: 8px;
@@ -579,7 +597,7 @@ body {
     display: none;
   }
   .card-arrow {
-    display: none;
+    /* keep visible on mobile — decorative element */
   }
 
   /* ── Dot indicators for carousel ── */
@@ -1136,7 +1154,7 @@ body {
   <div class="moment-card">
     <div class="video-frame" id="frame-megan" onclick="toggleMontageVid('megan')">
       <video id="vid-megan" preload="metadata" playsinline webkit-playsinline>
-        <source src="https://pub-f8c3e5028b5c4b64bc5bac34d29a9c11.r2.dev/Megan_Campbelltown SA_2025 Conference Case Study Interview_STRINGOUT.mp4#t=481,501" type="video/mp4">
+        <source src="https://pub-f8c3e5028b5c4b64bc5bac34d29a9c11.r2.dev/Megan_Campbelltown SA_2025 Conference Case Study Interview_STRINGOUT.mp4" type="video/mp4">
       </video>
       <img class="poster" id="poster-megan" src="https://pub-f8c3e5028b5c4b64bc5bac34d29a9c11.r2.dev/thumbnails/Megan_Campbelltown SA_2025 Conference Case Study Interview_STRINGOUT_01_29_43_02.jpg" alt="Megan">
       <div class="mm-play-btn" id="playbtn-megan">
@@ -1156,7 +1174,7 @@ body {
   <div class="moment-card">
     <div class="video-frame" id="frame-courtney" onclick="toggleMontageVid('courtney')">
       <video id="vid-courtney" preload="metadata" playsinline webkit-playsinline>
-        <source src="https://pub-f8c3e5028b5c4b64bc5bac34d29a9c11.r2.dev/Courtney_Toowoomba QLD_2025 Conference Case Study Interview_STRINGOUT.mp4#t=641,681" type="video/mp4">
+        <source src="https://pub-f8c3e5028b5c4b64bc5bac34d29a9c11.r2.dev/Courtney_Toowoomba QLD_2025 Conference Case Study Interview_STRINGOUT.mp4" type="video/mp4">
       </video>
       <img class="poster" id="poster-courtney" src="https://pub-f8c3e5028b5c4b64bc5bac34d29a9c11.r2.dev/thumbnails/Courtney_Toowoomba QLD_2025 Conference Case Study Interview_STRINGOUT_00_00_36_13.jpg" alt="Courtney">
       <div class="mm-play-btn" id="playbtn-courtney">
@@ -1176,7 +1194,7 @@ body {
   <div class="moment-card">
     <div class="video-frame" id="frame-ricki" onclick="toggleMontageVid('ricki')">
       <video id="vid-ricki" preload="metadata" playsinline webkit-playsinline>
-        <source src="https://pub-f8c3e5028b5c4b64bc5bac34d29a9c11.r2.dev/Ricki_Maroochydore_2025 Conference Case Study Interview_STRINGOUT.mp4#t=627,670" type="video/mp4">
+        <source src="https://pub-f8c3e5028b5c4b64bc5bac34d29a9c11.r2.dev/Ricki_Maroochydore_2025 Conference Case Study Interview_STRINGOUT.mp4" type="video/mp4">
       </video>
       <img class="poster" id="poster-ricki" src="https://pub-f8c3e5028b5c4b64bc5bac34d29a9c11.r2.dev/thumbnails/Ricki_Maroochydore_2025 Conference Case Study Interview_STRINGOUT_00_01_47_04.jpg" alt="Ricki">
       <div class="mm-play-btn" id="playbtn-ricki">
@@ -1196,7 +1214,7 @@ body {
   <div class="moment-card">
     <div class="video-frame" id="frame-maleah" onclick="toggleMontageVid('maleah')">
       <video id="vid-maleah" preload="metadata" playsinline webkit-playsinline>
-        <source src="https://pub-f8c3e5028b5c4b64bc5bac34d29a9c11.r2.dev/Maleah_Sippy Downs_2025 Conference Case Study Interview_STRINGOUT.mp4#t=542,582" type="video/mp4">
+        <source src="https://pub-f8c3e5028b5c4b64bc5bac34d29a9c11.r2.dev/Maleah_Sippy Downs_2025 Conference Case Study Interview_STRINGOUT.mp4" type="video/mp4">
       </video>
       <img class="poster" id="poster-maleah" src="https://pub-f8c3e5028b5c4b64bc5bac34d29a9c11.r2.dev/thumbnails/Maleah_Sippy Downs_2025 Conference Case Study Interview_ _STRINGOUT_00_01_09_10.jpg" alt="Maleah">
       <div class="mm-play-btn" id="playbtn-maleah">
@@ -1216,7 +1234,7 @@ body {
   <div class="moment-card">
     <div class="video-frame" id="frame-danielle" onclick="toggleMontageVid('danielle')">
       <video id="vid-danielle" preload="metadata" playsinline webkit-playsinline>
-        <source src="https://pub-f8c3e5028b5c4b64bc5bac34d29a9c11.r2.dev/Danielle_Southport QLD_2025 Conference Case Study Interview_STRINGOUT.mp4#t=493,526" type="video/mp4">
+        <source src="https://pub-f8c3e5028b5c4b64bc5bac34d29a9c11.r2.dev/Danielle_Southport QLD_2025 Conference Case Study Interview_STRINGOUT.mp4" type="video/mp4">
       </video>
       <img class="poster" id="poster-danielle" src="https://pub-f8c3e5028b5c4b64bc5bac34d29a9c11.r2.dev/thumbnails/Danielle_Southport QLD_2025 Conference Case Study Interview_STRINGOUT_00_00_16_20.jpg" alt="Danielle">
       <div class="mm-play-btn" id="playbtn-danielle">
@@ -1252,7 +1270,7 @@ body {
   <div class="moment-card">
     <div class="video-frame" id="frame-zoey" onclick="toggleMontageVid('zoey')">
       <video id="vid-zoey" preload="metadata" playsinline webkit-playsinline>
-        <source src="https://pub-f8c3e5028b5c4b64bc5bac34d29a9c11.r2.dev/Zoey_Mackay QLD_2025 Conference Case Study Interview_STRINGOUT.mp4#t=279,327" type="video/mp4">
+        <source src="https://pub-f8c3e5028b5c4b64bc5bac34d29a9c11.r2.dev/Zoey_Mackay QLD_2025 Conference Case Study Interview_STRINGOUT.mp4" type="video/mp4">
       </video>
       <img class="poster" id="poster-zoey" src="https://pub-f8c3e5028b5c4b64bc5bac34d29a9c11.r2.dev/thumbnails/Zoey_Mackay QLD_2025 Conference Case Study Interview_STRINGOUT_01_12_37_16.jpg" alt="Zoey">
       <div class="mm-play-btn" id="playbtn-zoey">
@@ -1272,7 +1290,7 @@ body {
   <div class="moment-card">
     <div class="video-frame" id="frame-courtney2" onclick="toggleMontageVid('courtney2')">
       <video id="vid-courtney2" preload="metadata" playsinline webkit-playsinline>
-        <source src="https://pub-f8c3e5028b5c4b64bc5bac34d29a9c11.r2.dev/Courtney_Toowoomba QLD_2025 Conference Case Study Interview_STRINGOUT.mp4#t=535,560" type="video/mp4">
+        <source src="https://pub-f8c3e5028b5c4b64bc5bac34d29a9c11.r2.dev/Courtney_Toowoomba QLD_2025 Conference Case Study Interview_STRINGOUT.mp4" type="video/mp4">
       </video>
       <img class="poster" id="poster-courtney2" src="https://pub-f8c3e5028b5c4b64bc5bac34d29a9c11.r2.dev/thumbnails/Courtney_Toowoomba QLD_2025 Conference Case Study Interview_STRINGOUT_00_00_36_13.jpg" alt="Courtney">
       <div class="mm-play-btn" id="playbtn-courtney2">
@@ -1292,7 +1310,7 @@ body {
   <div class="moment-card">
     <div class="video-frame" id="frame-maleah2" onclick="toggleMontageVid('maleah2')">
       <video id="vid-maleah2" preload="metadata" playsinline webkit-playsinline>
-        <source src="https://pub-f8c3e5028b5c4b64bc5bac34d29a9c11.r2.dev/Maleah_Sippy Downs_2025 Conference Case Study Interview_STRINGOUT.mp4#t=113,125" type="video/mp4">
+        <source src="https://pub-f8c3e5028b5c4b64bc5bac34d29a9c11.r2.dev/Maleah_Sippy Downs_2025 Conference Case Study Interview_STRINGOUT.mp4" type="video/mp4">
       </video>
       <img class="poster" id="poster-maleah2" src="https://pub-f8c3e5028b5c4b64bc5bac34d29a9c11.r2.dev/thumbnails/Maleah_Sippy Downs_2025 Conference Case Study Interview_ _STRINGOUT_00_01_09_10.jpg" alt="Maleah">
       <div class="mm-play-btn" id="playbtn-maleah2">
@@ -1312,7 +1330,7 @@ body {
   <div class="moment-card">
     <div class="video-frame" id="frame-ricki2" onclick="toggleMontageVid('ricki2')">
       <video id="vid-ricki2" preload="metadata" playsinline webkit-playsinline>
-        <source src="https://pub-f8c3e5028b5c4b64bc5bac34d29a9c11.r2.dev/Ricki_Maroochydore_2025 Conference Case Study Interview_STRINGOUT.mp4#t=452,484" type="video/mp4">
+        <source src="https://pub-f8c3e5028b5c4b64bc5bac34d29a9c11.r2.dev/Ricki_Maroochydore_2025 Conference Case Study Interview_STRINGOUT.mp4" type="video/mp4">
       </video>
       <img class="poster" id="poster-ricki2" src="https://pub-f8c3e5028b5c4b64bc5bac34d29a9c11.r2.dev/thumbnails/Ricki_Maroochydore_2025 Conference Case Study Interview_STRINGOUT_00_01_47_04.jpg" alt="Ricki">
       <div class="mm-play-btn" id="playbtn-ricki2">
@@ -1332,7 +1350,7 @@ body {
   <div class="moment-card">
     <div class="video-frame" id="frame-christian" onclick="toggleMontageVid('christian')">
       <video id="vid-christian" preload="metadata" playsinline webkit-playsinline>
-        <source src="https://pub-f8c3e5028b5c4b64bc5bac34d29a9c11.r2.dev/Christian_Yepoon QLD_2025 Conference Case Study Interview_STRINGOUT.mp4#t=650,685" type="video/mp4">
+        <source src="https://pub-f8c3e5028b5c4b64bc5bac34d29a9c11.r2.dev/Christian_Yepoon QLD_2025 Conference Case Study Interview_STRINGOUT.mp4" type="video/mp4">
       </video>
       <img class="poster" id="poster-christian" src="https://pub-f8c3e5028b5c4b64bc5bac34d29a9c11.r2.dev/thumbnails/Christian_Yepoon QLD_2025 Conference Case Study Interview_STRINGOUT_00_00_21_00.jpg" alt="Christian">
       <div class="mm-play-btn" id="playbtn-christian">
@@ -1368,7 +1386,7 @@ body {
   <div class="moment-card">
     <div class="video-frame" id="frame-sharnie" onclick="toggleMontageVid('sharnie')">
       <video id="vid-sharnie" preload="metadata" playsinline webkit-playsinline>
-        <source src="https://pub-f8c3e5028b5c4b64bc5bac34d29a9c11.r2.dev/Sharnie_Mildura VIC_2025 Conference Case Study Interview_STRINGOUT.mp4#t=503,531" type="video/mp4">
+        <source src="https://pub-f8c3e5028b5c4b64bc5bac34d29a9c11.r2.dev/Sharnie_Mildura VIC_2025 Conference Case Study Interview_STRINGOUT.mp4" type="video/mp4">
       </video>
       <img class="poster" id="poster-sharnie" src="https://pub-f8c3e5028b5c4b64bc5bac34d29a9c11.r2.dev/thumbnails/Sharnie_Mildura VIC_2025 Conference Case Study Interview_STRINGOUT_00_00_00_00.jpg" alt="Sharnie">
       <div class="mm-play-btn" id="playbtn-sharnie">
@@ -1388,7 +1406,7 @@ body {
   <div class="moment-card">
     <div class="video-frame" id="frame-danielle2" onclick="toggleMontageVid('danielle2')">
       <video id="vid-danielle2" preload="metadata" playsinline webkit-playsinline>
-        <source src="https://pub-f8c3e5028b5c4b64bc5bac34d29a9c11.r2.dev/Danielle_Southport QLD_2025 Conference Case Study Interview_STRINGOUT.mp4#t=372,425" type="video/mp4">
+        <source src="https://pub-f8c3e5028b5c4b64bc5bac34d29a9c11.r2.dev/Danielle_Southport QLD_2025 Conference Case Study Interview_STRINGOUT.mp4" type="video/mp4">
       </video>
       <img class="poster" id="poster-danielle2" src="https://pub-f8c3e5028b5c4b64bc5bac34d29a9c11.r2.dev/thumbnails/Danielle_Southport QLD_2025 Conference Case Study Interview_STRINGOUT_00_00_16_20.jpg" alt="Danielle">
       <div class="mm-play-btn" id="playbtn-danielle2">
@@ -1408,7 +1426,7 @@ body {
   <div class="moment-card">
     <div class="video-frame" id="frame-zoey2" onclick="toggleMontageVid('zoey2')">
       <video id="vid-zoey2" preload="metadata" playsinline webkit-playsinline>
-        <source src="https://pub-f8c3e5028b5c4b64bc5bac34d29a9c11.r2.dev/Zoey_Mackay QLD_2025 Conference Case Study Interview_STRINGOUT.mp4#t=919,971" type="video/mp4">
+        <source src="https://pub-f8c3e5028b5c4b64bc5bac34d29a9c11.r2.dev/Zoey_Mackay QLD_2025 Conference Case Study Interview_STRINGOUT.mp4" type="video/mp4">
       </video>
       <img class="poster" id="poster-zoey2" src="https://pub-f8c3e5028b5c4b64bc5bac34d29a9c11.r2.dev/thumbnails/Zoey_Mackay QLD_2025 Conference Case Study Interview_STRINGOUT_01_12_37_16.jpg" alt="Zoey">
       <div class="mm-play-btn" id="playbtn-zoey2">
@@ -1428,7 +1446,7 @@ body {
   <div class="moment-card">
     <div class="video-frame" id="frame-shaun" onclick="toggleMontageVid('shaun')">
       <video id="vid-shaun" preload="metadata" playsinline webkit-playsinline>
-        <source src="https://pub-f8c3e5028b5c4b64bc5bac34d29a9c11.r2.dev/Shaun_Mt Maunganui_2025 Conference Case Study Interview_STRINGOUT.mp4#t=340,370" type="video/mp4">
+        <source src="https://pub-f8c3e5028b5c4b64bc5bac34d29a9c11.r2.dev/Shaun_Mt Maunganui_2025 Conference Case Study Interview_STRINGOUT.mp4" type="video/mp4">
       </video>
       <img class="poster" id="poster-shaun" src="https://pub-f8c3e5028b5c4b64bc5bac34d29a9c11.r2.dev/thumbnails/Shaun_Mt Maunganui_2025 Conference Case Study Interview_ _STRINGOUT_00_05_39_17.jpg" alt="Shaun">
       <div class="mm-play-btn" id="playbtn-shaun">
@@ -1448,7 +1466,7 @@ body {
   <div class="moment-card">
     <div class="video-frame" id="frame-ricki3" onclick="toggleMontageVid('ricki3')">
       <video id="vid-ricki3" preload="metadata" playsinline webkit-playsinline>
-        <source src="https://pub-f8c3e5028b5c4b64bc5bac34d29a9c11.r2.dev/Ricki_Maroochydore_2025 Conference Case Study Interview_STRINGOUT.mp4#t=1133,1174" type="video/mp4">
+        <source src="https://pub-f8c3e5028b5c4b64bc5bac34d29a9c11.r2.dev/Ricki_Maroochydore_2025 Conference Case Study Interview_STRINGOUT.mp4" type="video/mp4">
       </video>
       <img class="poster" id="poster-ricki3" src="https://pub-f8c3e5028b5c4b64bc5bac34d29a9c11.r2.dev/thumbnails/Ricki_Maroochydore_2025 Conference Case Study Interview_STRINGOUT_00_01_47_04.jpg" alt="Ricki">
       <div class="mm-play-btn" id="playbtn-ricki3">
@@ -1484,7 +1502,7 @@ body {
   <div class="moment-card">
     <div class="video-frame" id="frame-maleah3" onclick="toggleMontageVid('maleah3')">
       <video id="vid-maleah3" preload="metadata" playsinline webkit-playsinline>
-        <source src="https://pub-f8c3e5028b5c4b64bc5bac34d29a9c11.r2.dev/Maleah_Sippy Downs_2025 Conference Case Study Interview_STRINGOUT.mp4#t=260,279" type="video/mp4">
+        <source src="https://pub-f8c3e5028b5c4b64bc5bac34d29a9c11.r2.dev/Maleah_Sippy Downs_2025 Conference Case Study Interview_STRINGOUT.mp4" type="video/mp4">
       </video>
       <img class="poster" id="poster-maleah3" src="https://pub-f8c3e5028b5c4b64bc5bac34d29a9c11.r2.dev/thumbnails/Maleah_Sippy Downs_2025 Conference Case Study Interview_ _STRINGOUT_00_01_09_10.jpg" alt="Maleah">
       <div class="mm-play-btn" id="playbtn-maleah3">
@@ -1504,7 +1522,7 @@ body {
   <div class="moment-card">
     <div class="video-frame" id="frame-courtney3" onclick="toggleMontageVid('courtney3')">
       <video id="vid-courtney3" preload="metadata" playsinline webkit-playsinline>
-        <source src="https://pub-f8c3e5028b5c4b64bc5bac34d29a9c11.r2.dev/Courtney_Toowoomba QLD_2025 Conference Case Study Interview_STRINGOUT.mp4#t=258,281" type="video/mp4">
+        <source src="https://pub-f8c3e5028b5c4b64bc5bac34d29a9c11.r2.dev/Courtney_Toowoomba QLD_2025 Conference Case Study Interview_STRINGOUT.mp4" type="video/mp4">
       </video>
       <img class="poster" id="poster-courtney3" src="https://pub-f8c3e5028b5c4b64bc5bac34d29a9c11.r2.dev/thumbnails/Courtney_Toowoomba QLD_2025 Conference Case Study Interview_STRINGOUT_00_00_36_13.jpg" alt="Courtney">
       <div class="mm-play-btn" id="playbtn-courtney3">
@@ -1524,7 +1542,7 @@ body {
   <div class="moment-card">
     <div class="video-frame" id="frame-shaun2" onclick="toggleMontageVid('shaun2')">
       <video id="vid-shaun2" preload="metadata" playsinline webkit-playsinline>
-        <source src="https://pub-f8c3e5028b5c4b64bc5bac34d29a9c11.r2.dev/Shaun_Mt Maunganui_2025 Conference Case Study Interview_STRINGOUT.mp4#t=685,728" type="video/mp4">
+        <source src="https://pub-f8c3e5028b5c4b64bc5bac34d29a9c11.r2.dev/Shaun_Mt Maunganui_2025 Conference Case Study Interview_STRINGOUT.mp4" type="video/mp4">
       </video>
       <img class="poster" id="poster-shaun2" src="https://pub-f8c3e5028b5c4b64bc5bac34d29a9c11.r2.dev/thumbnails/Shaun_Mt Maunganui_2025 Conference Case Study Interview_ _STRINGOUT_00_05_39_17.jpg" alt="Shaun">
       <div class="mm-play-btn" id="playbtn-shaun2">
@@ -1544,7 +1562,7 @@ body {
   <div class="moment-card">
     <div class="video-frame" id="frame-zoey3" onclick="toggleMontageVid('zoey3')">
       <video id="vid-zoey3" preload="metadata" playsinline webkit-playsinline>
-        <source src="https://pub-f8c3e5028b5c4b64bc5bac34d29a9c11.r2.dev/Zoey_Mackay QLD_2025 Conference Case Study Interview_STRINGOUT.mp4#t=819,866" type="video/mp4">
+        <source src="https://pub-f8c3e5028b5c4b64bc5bac34d29a9c11.r2.dev/Zoey_Mackay QLD_2025 Conference Case Study Interview_STRINGOUT.mp4" type="video/mp4">
       </video>
       <img class="poster" id="poster-zoey3" src="https://pub-f8c3e5028b5c4b64bc5bac34d29a9c11.r2.dev/thumbnails/Zoey_Mackay QLD_2025 Conference Case Study Interview_STRINGOUT_01_12_37_16.jpg" alt="Zoey">
       <div class="mm-play-btn" id="playbtn-zoey3">
@@ -1564,7 +1582,7 @@ body {
   <div class="moment-card">
     <div class="video-frame" id="frame-megan3" onclick="toggleMontageVid('megan3')">
       <video id="vid-megan3" preload="metadata" playsinline webkit-playsinline>
-        <source src="https://pub-f8c3e5028b5c4b64bc5bac34d29a9c11.r2.dev/Megan_Campbelltown SA_2025 Conference Case Study Interview_STRINGOUT.mp4#t=137,155" type="video/mp4">
+        <source src="https://pub-f8c3e5028b5c4b64bc5bac34d29a9c11.r2.dev/Megan_Campbelltown SA_2025 Conference Case Study Interview_STRINGOUT.mp4" type="video/mp4">
       </video>
       <img class="poster" id="poster-megan3" src="https://pub-f8c3e5028b5c4b64bc5bac34d29a9c11.r2.dev/thumbnails/Megan_Campbelltown SA_2025 Conference Case Study Interview_STRINGOUT_01_29_43_02.jpg" alt="Megan">
       <div class="mm-play-btn" id="playbtn-megan3">
@@ -1802,33 +1820,41 @@ function toggleMontageVid(key) {
     var oldVid = document.getElementById('vid-' + activeMontageKey);
     var oldFrame = document.getElementById('frame-' + activeMontageKey);
     if (oldVid) oldVid.pause();
-    if (oldFrame) oldFrame.classList.remove('playing');
+    if (oldFrame) { oldFrame.classList.remove('playing'); oldFrame.classList.remove('loading'); }
   }
 
   var vid = document.getElementById('vid-' + key);
   var frame = document.getElementById('frame-' + key);
   if (!vid || !frame) { console.error('Missing element for', key); return; }
 
-  if (frame.classList.contains('playing')) {
+  // Toggle off if already playing or loading
+  if (frame.classList.contains('playing') || frame.classList.contains('loading')) {
     vid.pause();
     frame.classList.remove('playing');
+    frame.classList.remove('loading');
     activeMontageKey = null;
     return;
   }
+
+  // Show loading spinner immediately
+  frame.classList.add('loading');
+  activeMontageKey = key;
 
   function seekAndPlay() {
     vid.currentTime = starts[key];
     var playPromise = vid.play();
     if (playPromise !== undefined) {
       playPromise.then(function() {
+        frame.classList.remove('loading');
         frame.classList.add('playing');
-        activeMontageKey = key;
       }).catch(function(e) {
+        frame.classList.remove('loading');
+        activeMontageKey = null;
         console.error('Play failed for ' + key + ':', e);
       });
     } else {
+      frame.classList.remove('loading');
       frame.classList.add('playing');
-      activeMontageKey = key;
     }
   }
 
