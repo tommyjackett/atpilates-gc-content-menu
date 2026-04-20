@@ -605,7 +605,7 @@ body {
 /* ═══ MOBILE RESPONSIVE ═══ */
 @media (max-width: 768px) {
   html, body {
-    overflow-x: hidden;
+    overflow-x: clip;
     max-width: 100vw;
   }
   body {
@@ -663,10 +663,11 @@ body {
   /* ── Carousel strips: horizontal swipe, show first slide ── */
   .carousel-strip {
     overflow-x: scroll;
-    overflow-y: hidden;
+    /* overflow-y left as auto (coerced by scroll-x) — extra padding
+       ensures shadows, arrows, stickers fit inside the scrollport */
     -webkit-overflow-scrolling: touch;
     scroll-snap-type: x mandatory;
-    padding: 28px 16px 16px 16px;
+    padding: 28px 16px 56px 16px;
     scroll-padding-left: 16px;
     gap: 16px;
     scrollbar-width: none;
@@ -747,10 +748,10 @@ body {
   /* ── Montage / Highlights rows: horizontal swipe ── */
   .highlights-row {
     overflow-x: scroll;
-    overflow-y: hidden;
+    /* overflow-y left as auto — extra padding accommodates shadows */
     -webkit-overflow-scrolling: touch;
     scroll-snap-type: x mandatory;
-    padding: 8px 16px 12px 16px;
+    padding: 8px 16px 40px 16px;
     scroll-padding-left: 16px;
     gap: 12px;
     scrollbar-width: none;
