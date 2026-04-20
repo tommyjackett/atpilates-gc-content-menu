@@ -289,19 +289,26 @@ body {
 
 /* ═══ BRAND ARCH HERO ═══ */
 .hero-arch {
-  background: #C58E93;
-  text-align: center;
-  padding: 48px 40px 0;
-  margin: -40px auto 0;
   max-width: 560px;
   width: 100%;
+  margin: -40px auto 0;
+  text-align: center;
   position: relative;
-  border-radius: 0 0 50% 50% / 0 0 120% 120%;
 }
 .hero-arch-content {
+  background: #C58E93;
+  padding: 48px 40px 20px;
   position: relative;
   z-index: 1;
-  padding-bottom: 48px;
+}
+.hero-arch::after {
+  content: '';
+  display: block;
+  width: 100%;
+  padding-bottom: 50%;
+  background: #C58E93;
+  border-radius: 0 0 50% 50% / 0 0 100% 100%;
+  margin-top: -1px;
 }
 .hero-arch .arch-logo {
   height: 44px;
@@ -602,7 +609,9 @@ body {
   .hero-arch {
     margin: -24px auto 0;
     max-width: calc(100% - 8px);
-    padding: 32px 20px 0;
+  }
+  .hero-arch-content {
+    padding: 32px 20px 16px;
   }
   .hero-arch .arch-logo {
     height: 36px;
