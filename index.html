@@ -709,7 +709,13 @@ body {
     display: none !important;
   }
   .card-arrow {
-    /* visible on mobile — decorative element */
+    /* Reposition on mobile — desktop bottom:46px overlaps hook text
+       on shorter mobile cards. Move into the 56px bottom-padding zone
+       and scale down so it hints "swipe" without covering content. */
+    bottom: -8px !important;
+    right: 8px !important;
+    width: 40px !important;
+    height: 48px !important;
   }
 
   /* ── Dot indicators for carousel ── */
