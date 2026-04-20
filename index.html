@@ -288,16 +288,36 @@ body {
 .montage-section .chevron.visible { opacity: 1; }
 
 /* ═══ PAGE TITLE ═══ */
-.page-title {
-  font-family: 'Sohne', sans-serif;
-  font-weight: 700;
-  font-size: 18px;
-  color: #C58E93;
-  letter-spacing: 1px;
-  text-transform: uppercase;
+.page-intro {
   text-align: center;
-  margin: 0 0 40px 0;
-  padding: 20px 0 0 0;
+  max-width: 560px;
+  margin: 0 auto 40px;
+  padding: 12px 24px 0;
+}
+.page-intro .intro-label {
+  font-family: 'Sohne', sans-serif;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: #999;
+  margin-bottom: 12px;
+}
+.page-intro .intro-body {
+  font-size: 15px;
+  line-height: 1.7;
+  color: #555;
+  margin-bottom: 16px;
+}
+.page-intro .intro-body strong {
+  color: #333;
+  font-weight: 600;
+}
+.page-intro .intro-divider {
+  width: 40px;
+  height: 2px;
+  background: #e0dbd6;
+  margin: 0 auto;
 }
 
 /* Logo stays at original position (top-left) */
@@ -556,8 +576,11 @@ body {
   body {
     padding: 24px 12px;
   }
-  .page-title {
-    font-size: 24px;
+  .page-intro {
+    padding: 8px 16px 0;
+  }
+  .page-intro .intro-body {
+    font-size: 14px;
   }
   .section-heading h2 {
     font-size: 20px;
@@ -757,11 +780,14 @@ body {
   <img src="https://pub-f8c3e5028b5c4b64bc5bac34d29a9c11.r2.dev/assets/logo-dark.png" alt="@Pilates" style="height: 40px; opacity: 0.85;">
 </div>
 
-<div class="page-title">@Pilates Content Menu</div>
+<div class="page-intro">
+  <div class="intro-label">A Vidpod Content Menu</div>
+  <p class="intro-body">A selection of the moments that matter from across ten interviews — sorted into <strong>Carousel Stories</strong> ready for social, and <strong>Montage Moments</strong> that can be cut into hero videos around a specific theme.</p>
+  <div class="intro-divider"></div>
+</div>
 
 <div class="section-heading">
   <h2 style="color: #C58E93;">Carousel Stories</h2>
-  <p class="section-intro">Stories from franchise partners ready for carousel. Click a theme to preview.</p>
 </div>
 
 <div class="theme-pills">
@@ -1180,7 +1206,7 @@ body {
 
 <div class="section-heading">
   <h2>Montage Moments</h2>
-  <p class="section-intro">Raw clips from across ten interviews — see what could make the cut. Click a topic to preview.</p>
+  <p class="section-intro">Clips sorted by theme — each group could become a hero video. Click a topic to preview.</p>
 </div>
 
 <div class="montage-pills">
