@@ -41,8 +41,7 @@ body {
 .page-header h1 { font-size: 13px; font-weight: 400; color: #999; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 4px; }
 .page-header .thread-name { font-size: 18px; font-weight: 700; color: #333; }
 
-.carousel-strip { display: flex; align-items: center; gap: 16px; max-width: 1200px; width: 100%; padding: 32px 16px 40px 16px; flex-wrap: nowrap; overflow-x: auto; -webkit-overflow-scrolling: touch; scrollbar-width: none; }
-.carousel-strip::-webkit-scrollbar { display: none; }
+.carousel-strip { display: flex; align-items: center; gap: 16px; max-width: 1200px; width: 100%; padding: 32px 16px 40px 16px; flex-wrap: nowrap; }
 .slide-wrap { flex-shrink: 0; }
 .slide { 
   position: relative; 
@@ -164,10 +163,6 @@ body {
 .card-arrow {
   position: absolute;
   z-index: 20;
-  display: none;
-}
-@media (min-width: 1200px) {
-  .card-arrow { display: block; }
 }
 .card-arrow svg {
   opacity: 0.85;
@@ -713,7 +708,7 @@ body {
     display: none !important;
   }
   .card-arrow {
-    /* hidden by default, shown via min-width: 769px rule */
+    /* visible on mobile — decorative element */
   }
 
   /* ── Dot indicators for carousel ── */
