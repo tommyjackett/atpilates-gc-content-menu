@@ -256,6 +256,9 @@ body {
 .montage-section { display: none; }
 .montage-section.active { display: block; }
 
+/* Dot indicators — hidden on desktop, shown on mobile via media query */
+.carousel-dots, .montage-dots { display: none; }
+
 /* Montage pills — same style as carousel theme pills */
 .montage-pills { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 24px; max-width: 1200px; width: 100%; }
 .montage-pill { font-family: 'Sohne', sans-serif; font-size: 13px; font-weight: 600; padding: 8px 20px; border-radius: 24px; border: 1.5px solid #e0dbd6; background: #fff; color: #888; cursor: pointer; transition: all 0.25s ease; }
@@ -513,12 +516,13 @@ body {
 
   /* ── Carousel strips: horizontal swipe, show first slide ── */
   .carousel-strip {
-    overflow-x: auto;
+    overflow: hidden auto !important;
+    overflow-x: auto !important;
+    overflow-y: hidden !important;
     -webkit-overflow-scrolling: touch;
     scroll-snap-type: x mandatory;
-    padding: 16px 12px 24px 12px;
+    padding: 16px 12px 8px 12px;
     gap: 12px;
-    /* Hide scrollbar */
     scrollbar-width: none;
     -ms-overflow-style: none;
   }
@@ -530,30 +534,52 @@ body {
     scroll-snap-align: start;
   }
   .slide {
-    width: calc(100vw - 56px);
-    height: calc((100vw - 56px) * 1.25);
+    width: calc(100vw - 48px);
+    height: calc((100vw - 48px) * 1.25);
   }
   .video-container {
-    width: calc(100vw - 56px);
-    height: calc((100vw - 56px) * 1.25);
+    width: calc(100vw - 48px);
+    height: calc((100vw - 48px) * 1.25);
   }
   /* Hide chevrons between slides on mobile — swipe instead */
   .carousel-strip .slide-chevron {
     display: none;
   }
-  /* Card arrows on slides */
   .card-arrow {
     display: none;
   }
 
+  /* ── Dot indicators for carousel ── */
+  .carousel-dots {
+    display: flex !important;
+    justify-content: center;
+    gap: 8px;
+    padding: 8px 0 16px 0;
+  }
+  .carousel-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: #d4cfc9;
+    transition: all 0.3s ease;
+    cursor: pointer;
+  }
+  .carousel-dot.active {
+    background: #C58E93;
+    width: 24px;
+    border-radius: 4px;
+  }
+
   /* ── Montage / Highlights rows: horizontal swipe ── */
   .highlights-row {
-    overflow-x: auto;
+    overflow: hidden auto !important;
+    overflow-x: auto !important;
+    overflow-y: hidden !important;
     -webkit-overflow-scrolling: touch;
     scroll-snap-type: x mandatory;
-    padding-bottom: 12px;
+    scroll-behavior: smooth;
+    padding-bottom: 8px;
     gap: 10px;
-    /* Hide scrollbar */
     scrollbar-width: none;
     -ms-overflow-style: none;
   }
@@ -563,11 +589,11 @@ body {
   .moment-card {
     scroll-snap-align: start;
     flex-shrink: 0;
-    width: calc(100vw - 80px);
+    width: calc(100vw - 64px);
   }
   .video-frame {
     width: 100%;
-    height: calc((100vw - 80px) * 1.25);
+    height: calc((100vw - 64px) * 1.25);
   }
   /* Hide chevrons between moment cards on mobile */
   .chevron {
@@ -575,6 +601,27 @@ body {
   }
   .moment-context {
     font-size: 12px;
+    padding: 10px 12px;
+  }
+
+  /* ── Montage dot indicators ── */
+  .montage-dots {
+    display: flex !important;
+    justify-content: center;
+    gap: 6px;
+    padding: 8px 0 4px 0;
+  }
+  .montage-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: #d4cfc9;
+    transition: all 0.3s ease;
+  }
+  .montage-dot.active {
+    background: #C58E93;
+    width: 18px;
+    border-radius: 3px;
   }
 
   /* ── Override fade-in animations — all items visible for swiping ── */
@@ -584,6 +631,7 @@ body {
   .montage-section .chevron {
     opacity: 1 !important;
     transform: none !important;
+    transition: none !important;
   }
 
   /* ── Sticker sizing on mobile ── */
@@ -699,6 +747,11 @@ body {
   </div>
 
 </div>
+<div class="carousel-dots">
+  <div class="carousel-dot active" data-index="0"></div>
+  <div class="carousel-dot" data-index="1"></div>
+  <div class="carousel-dot" data-index="2"></div>
+</div>
 
 </div><!-- /section-christian -->
 
@@ -778,6 +831,11 @@ body {
   </div>
 
 </div>
+<div class="carousel-dots">
+  <div class="carousel-dot active" data-index="0"></div>
+  <div class="carousel-dot" data-index="1"></div>
+  <div class="carousel-dot" data-index="2"></div>
+</div>
 </div><!-- /section-maleah -->
 
 <div class="carousel-section" id="section-ricki">
@@ -850,6 +908,11 @@ body {
     </div>
   </div>
 
+</div>
+<div class="carousel-dots">
+  <div class="carousel-dot active" data-index="0"></div>
+  <div class="carousel-dot" data-index="1"></div>
+  <div class="carousel-dot" data-index="2"></div>
 </div>
 </div><!-- /section-ricki -->
 
@@ -924,6 +987,11 @@ body {
   </div>
 
 </div>
+<div class="carousel-dots">
+  <div class="carousel-dot active" data-index="0"></div>
+  <div class="carousel-dot" data-index="1"></div>
+  <div class="carousel-dot" data-index="2"></div>
+</div>
 </div><!-- /section-danielle -->
 
 <div class="carousel-section" id="section-sharnie">
@@ -996,6 +1064,11 @@ body {
     </div>
   </div>
 
+</div>
+<div class="carousel-dots">
+  <div class="carousel-dot active" data-index="0"></div>
+  <div class="carousel-dot" data-index="1"></div>
+  <div class="carousel-dot" data-index="2"></div>
 </div>
 </div><!-- /section-sharnie -->
 
@@ -1122,6 +1195,13 @@ body {
   </div>
 
 </div>
+<div class="montage-dots" data-section="community">
+  <div class="montage-dot active" data-index="0"></div>
+  <div class="montage-dot" data-index="1"></div>
+  <div class="montage-dot" data-index="2"></div>
+  <div class="montage-dot" data-index="3"></div>
+  <div class="montage-dot" data-index="4"></div>
+</div>
 </div><!-- /montage-community -->
 
 <div class="montage-section" id="montage-decision">
@@ -1230,6 +1310,13 @@ body {
     <div class="moment-context">Could've crashed. Didn't.</div>
   </div>
 
+</div>
+<div class="montage-dots" data-section="decision">
+  <div class="montage-dot active" data-index="0"></div>
+  <div class="montage-dot" data-index="1"></div>
+  <div class="montage-dot" data-index="2"></div>
+  <div class="montage-dot" data-index="3"></div>
+  <div class="montage-dot" data-index="4"></div>
 </div>
 </div><!-- /montage-decision -->
 
@@ -1340,6 +1427,13 @@ body {
   </div>
 
 </div>
+<div class="montage-dots" data-section="growth">
+  <div class="montage-dot active" data-index="0"></div>
+  <div class="montage-dot" data-index="1"></div>
+  <div class="montage-dot" data-index="2"></div>
+  <div class="montage-dot" data-index="3"></div>
+  <div class="montage-dot" data-index="4"></div>
+</div>
 </div><!-- /montage-growth -->
 
 <div class="montage-section" id="montage-purpose">
@@ -1448,6 +1542,13 @@ body {
     <div class="moment-context">Passionate about this her whole life</div>
   </div>
 
+</div>
+<div class="montage-dots" data-section="purpose">
+  <div class="montage-dot active" data-index="0"></div>
+  <div class="montage-dot" data-index="1"></div>
+  <div class="montage-dot" data-index="2"></div>
+  <div class="montage-dot" data-index="3"></div>
+  <div class="montage-dot" data-index="4"></div>
 </div>
 </div><!-- /montage-purpose -->
 
@@ -1694,6 +1795,100 @@ function toggleMontageVid(key) {
   };
 }
 
+</script>
+
+<script>
+// ===== MOBILE DOT INDICATORS + SCROLL MANAGEMENT =====
+(function() {
+  const isMobile = () => window.innerWidth <= 768;
+
+  // ── Carousel dot tracking ──
+  function initCarouselDots() {
+    document.querySelectorAll('.carousel-section').forEach(section => {
+      const strip = section.querySelector('.carousel-strip');
+      const dotsContainer = section.querySelector('.carousel-dots');
+      if (!strip || !dotsContainer) return;
+      const dots = dotsContainer.querySelectorAll('.carousel-dot');
+      const slides = strip.querySelectorAll('.slide-wrap');
+
+      strip.addEventListener('scroll', function() {
+        if (!isMobile()) return;
+        const scrollLeft = strip.scrollLeft;
+        const slideWidth = slides[0]?.offsetWidth || 1;
+        const gap = 12;
+        const index = Math.round(scrollLeft / (slideWidth + gap));
+        dots.forEach((d, i) => d.classList.toggle('active', i === index));
+      });
+
+      dots.forEach((dot, i) => {
+        dot.addEventListener('click', function() {
+          const slideWidth = slides[0]?.offsetWidth || 0;
+          const gap = 12;
+          strip.scrollTo({ left: i * (slideWidth + gap), behavior: 'smooth' });
+        });
+      });
+    });
+  }
+
+  // ── Montage dot tracking ──
+  function initMontageDots() {
+    document.querySelectorAll('.montage-section').forEach(section => {
+      const row = section.querySelector('.highlights-row');
+      const dotsContainer = section.querySelector('.montage-dots');
+      if (!row || !dotsContainer) return;
+      const dots = dotsContainer.querySelectorAll('.montage-dot');
+      const cards = row.querySelectorAll('.moment-card');
+
+      row.addEventListener('scroll', function() {
+        if (!isMobile()) return;
+        const scrollLeft = row.scrollLeft;
+        const cardWidth = cards[0]?.offsetWidth || 1;
+        const gap = 10;
+        const index = Math.round(scrollLeft / (cardWidth + gap));
+        dots.forEach((d, i) => d.classList.toggle('active', i === index));
+      });
+
+      dots.forEach((dot, i) => {
+        dot.addEventListener('click', function() {
+          const cardWidth = cards[0]?.offsetWidth || 0;
+          const gap = 10;
+          row.scrollTo({ left: i * (cardWidth + gap), behavior: 'smooth' });
+        });
+      });
+    });
+  }
+
+  // ── Reset scroll + dots when switching themes ──
+  const origShowTheme = window.showTheme;
+  window.showTheme = function(name, pill) {
+    origShowTheme(name, pill);
+    const section = document.getElementById('section-' + name);
+    if (section) {
+      const strip = section.querySelector('.carousel-strip');
+      if (strip) strip.scrollLeft = 0;
+      const dots = section.querySelectorAll('.carousel-dot');
+      dots.forEach((d, i) => d.classList.toggle('active', i === 0));
+    }
+  };
+
+  // ── Reset scroll + dots when switching montage topics ──
+  const origShowMontage = window.showMontage;
+  window.showMontage = function(name, pill) {
+    origShowMontage(name, pill);
+    const section = document.getElementById('montage-' + name);
+    if (section) {
+      const row = section.querySelector('.highlights-row');
+      if (row) row.scrollLeft = 0;
+      const dots = section.querySelectorAll('.montage-dot');
+      dots.forEach((d, i) => d.classList.toggle('active', i === 0));
+    }
+  };
+
+  document.addEventListener('DOMContentLoaded', function() {
+    initCarouselDots();
+    initMontageDots();
+  });
+})();
 </script>
 
 </body>
