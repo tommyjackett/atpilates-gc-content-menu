@@ -127,6 +127,19 @@ body {
 .video-container.playing .poster-img { opacity: 0; pointer-events: none; }
 .play-btn { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); z-index: 10; width: 72px; height: 72px; background: rgba(255,255,255,0.95); border-radius: 50%; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 24px rgba(0,0,0,0.3); cursor: pointer; transition: transform 0.15s, opacity 0.3s; }
 .play-btn:hover { transform: translate(-50%, -50%) scale(1.08); }
+.video-container.loading .play-btn { opacity: 0; pointer-events: none; }
+.video-container.loading::after {
+  content: '';
+  position: absolute;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  width: 48px; height: 48px;
+  border: 3px solid rgba(255,255,255,0.3);
+  border-top-color: #fff;
+  border-radius: 50%;
+  z-index: 12;
+  animation: spin 0.8s linear infinite;
+}
 .video-container.playing .play-btn { opacity: 0; pointer-events: none; }
 .play-triangle { width: 0; height: 0; border-style: solid; border-width: 14px 0 14px 24px; border-color: transparent transparent transparent #333; margin-left: 4px; }
 .sticker-quote { bottom: -16px; left: 16px; right: 16px; background: #fff; color: #333; font-size: 14px; font-weight: 700; transform: rotate(-0.8deg); line-height: 1.45; padding: 12px 16px; border-radius: 2px; }
@@ -1688,16 +1701,33 @@ function toggleVideo() {
   const video = document.getElementById('clipVideo');
   const poster = document.getElementById('posterImg');
   const playBtn = document.getElementById('playBtn');
-  if (video.paused) {
-    video.currentTime = 879;
-    video.play();
-    poster.style.opacity = '0'; poster.style.pointerEvents = 'none';
-    playBtn.style.opacity = '0'; playBtn.style.pointerEvents = 'none';
-    container.classList.add('playing');
-  } else {
+
+  if (container.classList.contains('loading')) {
+    video.pause();
+    container.classList.remove('loading');
+    container.classList.remove('playing');
+    return;
+  }
+  if (!video.paused) {
     video.pause();
     container.classList.remove('playing');
+    return;
   }
+
+  container.classList.add('loading');
+  video.currentTime = 879;
+
+  function onActualPlay() {
+    video.removeEventListener('playing', onActualPlay);
+    container.classList.remove('loading');
+    container.classList.add('playing');
+    poster.style.opacity = '0'; poster.style.pointerEvents = 'none';
+    playBtn.style.opacity = '0'; playBtn.style.pointerEvents = 'none';
+  }
+  video.addEventListener('playing', onActualPlay);
+
+  var p = video.play();
+  if (p) p.catch(function() { container.classList.remove('loading'); });
 }
 document.getElementById('clipVideo').addEventListener('timeupdate', function() {
   if (this.currentTime >= 919) {
@@ -1716,34 +1746,49 @@ function toggleVid(key) {
   const video = document.getElementById('video_' + key);
   const poster = document.getElementById('poster_' + key);
   const playBtn = document.getElementById('play_' + key);
-  
+
   // Pause all other videos first
   document.querySelectorAll('video').forEach(v => {
     if (v.id !== 'video_' + key && !v.paused) {
       v.pause();
       const k = v.id.replace('video_', '');
       const c = document.getElementById('container_' + k) || document.getElementById('videoSlide');
-      if (c) c.classList.remove('playing');
+      if (c) { c.classList.remove('playing'); c.classList.remove('loading'); }
       const p = document.getElementById('poster_' + k) || document.getElementById('posterImg');
       if (p) { p.style.opacity = '1'; p.style.pointerEvents = 'auto'; }
       const b = document.getElementById('play_' + k) || document.getElementById('playBtn');
       if (b) { b.style.opacity = '1'; b.style.pointerEvents = 'auto'; }
     }
   });
-  
-  if (video.paused) {
-    const starts = {"courtney": 641, "maleah": 792, "ricki": 1133, "danielle": 428, "sharnie": 503};
-    const ends = {"courtney": 679, "maleah": 838, "ricki": 1184, "danielle": 485, "sharnie": 530};
 
-    video.currentTime = starts[key];
-    video.play();
-    poster.style.opacity = '0'; poster.style.pointerEvents = 'none';
-    playBtn.style.opacity = '0'; playBtn.style.pointerEvents = 'none';
-    container.classList.add('playing');
-  } else {
+  // Toggle off if loading or playing
+  if (container.classList.contains('loading')) {
+    video.pause();
+    container.classList.remove('loading');
+    return;
+  }
+  if (!video.paused) {
     video.pause();
     container.classList.remove('playing');
+    return;
   }
+
+  const carouselStarts = {"courtney": 641, "maleah": 792, "ricki": 1133, "danielle": 428, "sharnie": 503};
+
+  container.classList.add('loading');
+  video.currentTime = carouselStarts[key];
+
+  function onActualPlay() {
+    video.removeEventListener('playing', onActualPlay);
+    container.classList.remove('loading');
+    container.classList.add('playing');
+    poster.style.opacity = '0'; poster.style.pointerEvents = 'none';
+    playBtn.style.opacity = '0'; playBtn.style.pointerEvents = 'none';
+  }
+  video.addEventListener('playing', onActualPlay);
+
+  var p = video.play();
+  if (p) p.catch(function() { container.classList.remove('loading'); });
 }
 
 // Timeupdate listeners for all new carousels
@@ -1838,19 +1883,23 @@ function toggleMontageVid(key) {
 
   function seekAndPlay() {
     vid.currentTime = starts[key];
+
+    // Wait for video to actually render before removing spinner
+    function onActualPlay() {
+      vid.removeEventListener('playing', onActualPlay);
+      frame.classList.remove('loading');
+      frame.classList.add('playing');
+    }
+    vid.addEventListener('playing', onActualPlay);
+
     var playPromise = vid.play();
     if (playPromise !== undefined) {
-      playPromise.then(function() {
-        frame.classList.remove('loading');
-        frame.classList.add('playing');
-      }).catch(function(e) {
+      playPromise.catch(function(e) {
+        vid.removeEventListener('playing', onActualPlay);
         frame.classList.remove('loading');
         activeMontageKey = null;
         console.error('Play failed for ' + key + ':', e);
       });
-    } else {
-      frame.classList.remove('loading');
-      frame.classList.add('playing');
     }
   }
 
