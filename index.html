@@ -316,8 +316,9 @@ body {
   margin-bottom: 14px;
 }
 
-/* ═══ WIDE-ONLY LINE BREAKS ═══ */
+/* ═══ RESPONSIVE LINE BREAKS ═══ */
 .wide-break { display: inline; }
+.mobile-break { display: none; }
 
 /* ═══ PAGE TITLE ═══ */
 .page-intro {
@@ -621,6 +622,7 @@ body {
     height: 36px;
   }
   .wide-break { display: none; }
+  .mobile-break { display: inline; }
   .page-intro {
     padding: 0 16px;
   }
@@ -709,10 +711,9 @@ body {
     display: none !important;
   }
   .card-arrow {
-    /* Reposition on mobile — desktop bottom:46px overlaps hook text
-       on shorter mobile cards. Move into the 56px bottom-padding zone
-       and scale down so it hints "swipe" without covering content. */
-    bottom: -8px !important;
+    /* Reposition on mobile — arrow top meets sticker-hook bottom (70px).
+       height 48px → bottom = 70 - 48 = 22px */
+    bottom: 22px !important;
     right: 8px !important;
     width: 40px !important;
     height: 48px !important;
@@ -833,7 +834,7 @@ body {
     <img class="arch-logo" src="https://pub-f8c3e5028b5c4b64bc5bac34d29a9c11.r2.dev/assets/logo-dark.png" alt="@Pilates">
     <div class="page-intro">
       <div class="intro-label">A Vidpod Content Menu</div>
-      <p class="intro-body">A taste of the moments that matter, from ten franchise partner interviews. Sorted into <strong>Carousel Stories</strong> and <strong>Montage Moments</strong>.</p>
+      <p class="intro-body">A taste of the moments that matter, from ten franchise partner interviews. Sorted into <strong>Carousel Stories</strong> <br class="mobile-break">and <strong>Montage Moments</strong>.</p>
       <div class="intro-divider"></div>
     </div>
   </div>
