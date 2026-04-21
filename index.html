@@ -291,6 +291,9 @@ body {
 .montage-pill:hover { border-color: #333; color: #333; }
 .montage-pill.active { background: #333; color: #fff; border-color: #333; }
 
+/* Pill dot indicators — hidden on desktop, shown on mobile via media query */
+.pill-dots { display: none; }
+
 /* Staggered fade-in for montage cards */
 .montage-section .moment-card { opacity: 0; transform: translateY(12px); transition: opacity 0.4s ease, transform 0.4s ease; }
 .montage-section .moment-card.visible { opacity: 1; transform: translateY(0); }
@@ -662,6 +665,27 @@ body {
     padding: 6px 14px;
   }
 
+  /* ── Pill dot indicators (mobile only) ── */
+  .pill-dots {
+    display: flex;
+    justify-content: center;
+    gap: 6px;
+    margin-top: 8px;
+    margin-bottom: 8px;
+  }
+  .pill-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: #d4cfc9;
+    transition: all 0.25s ease;
+  }
+  .pill-dot.active {
+    background: #423e3e;
+    width: 18px;
+    border-radius: 3px;
+  }
+
   /* ── Carousel strips: horizontal swipe, show first slide ── */
   .carousel-strip {
     overflow-x: scroll;
@@ -851,6 +875,13 @@ body {
   <div class="theme-pill" onclick="showTheme('ricki', this)">Effort & Reward</div>
   <div class="theme-pill" onclick="showTheme('danielle', this)">Purpose & Impact</div>
   <div class="theme-pill" onclick="showTheme('sharnie', this)">Self-Belief</div>
+</div>
+<div class="pill-dots" id="themeDots">
+  <span class="pill-dot active"></span>
+  <span class="pill-dot"></span>
+  <span class="pill-dot"></span>
+  <span class="pill-dot"></span>
+  <span class="pill-dot"></span>
 </div>
 
 <div class="carousel-section active" id="section-christian">
@@ -1273,6 +1304,12 @@ body {
   <div class="montage-pill" onclick="showMontage('decision', this)">The Decision</div>
   <div class="montage-pill" onclick="showMontage('growth', this)">Personal Growth</div>
   <div class="montage-pill" onclick="showMontage('purpose', this)">Purpose & Meaning</div>
+</div>
+<div class="pill-dots" id="montageDots">
+  <span class="pill-dot active"></span>
+  <span class="pill-dot"></span>
+  <span class="pill-dot"></span>
+  <span class="pill-dot"></span>
 </div>
 
 <div class="montage-section active" id="montage-community">
@@ -1757,8 +1794,17 @@ function showTheme(name, pill) {
   });
 
   // Update pills
-  document.querySelectorAll('.theme-pill').forEach(p => p.classList.remove('active'));
+  const themePills = document.querySelectorAll('.theme-pill');
+  themePills.forEach(p => p.classList.remove('active'));
   pill.classList.add('active');
+
+  // Update dot indicators
+  const themeDots = document.querySelectorAll('#themeDots .pill-dot');
+  const pillIdx = Array.from(themePills).indexOf(pill);
+  themeDots.forEach((d, i) => d.classList.toggle('active', i === pillIdx));
+
+  // Scroll active pill into view on mobile
+  pill.scrollIntoView({ inline: 'center', behavior: 'smooth', block: 'nearest' });
 
   // Show selected section
   const section = document.getElementById('section-' + name);
@@ -1785,8 +1831,17 @@ function showMontage(name, pill) {
   });
 
   // Update pills
-  document.querySelectorAll('.montage-pill').forEach(p => p.classList.remove('active'));
+  const montagePills = document.querySelectorAll('.montage-pill');
+  montagePills.forEach(p => p.classList.remove('active'));
   pill.classList.add('active');
+
+  // Update dot indicators
+  const montageDots = document.querySelectorAll('#montageDots .pill-dot');
+  const mPillIdx = Array.from(montagePills).indexOf(pill);
+  montageDots.forEach((d, i) => d.classList.toggle('active', i === mPillIdx));
+
+  // Scroll active pill into view on mobile
+  pill.scrollIntoView({ inline: 'center', behavior: 'smooth', block: 'nearest' });
 
   // Show selected section
   const section = document.getElementById('montage-' + name);
